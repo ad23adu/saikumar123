@@ -30,8 +30,6 @@ elections_stacked_normalized <- elections_stacked %>%
   mutate(Percentage = ifelse(sum(Count, na.rm = TRUE) > 0, Count / sum(Count, na.rm = TRUE) * 100, NA)) %>%
   ungroup() %>%
   filter(!is.na(Percentage))  
-
-# Create the normalized stacked bar chart
 ggplot(elections_stacked_normalized, aes(x = State, y = Percentage, fill = Category)) +
   geom_bar(stat = "identity") +  
   labs(
