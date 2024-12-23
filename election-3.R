@@ -16,8 +16,6 @@ for (pkg in required_packages) {
 print("All required packages are successfully installed and loaded.")
 
 
-
-# Normalize and reshape the data
 elections_stacked <- elections %>%
   select(State, X..Non.citizen, Prison, Probation, Parole) %>%
   mutate(across(-State, ~ as.numeric(gsub(",", "", .)), .names = "cleaned_{col}")) %>%
