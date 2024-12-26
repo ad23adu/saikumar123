@@ -30,15 +30,13 @@ ggplot(elections, aes(x = Vote.for.Highest.Office..President., y = VEP.Turnout.R
 
 
 #b)
-# Clean the VEP Turnout Rate column
 elections$VEP.Turnout.Rate <- as.numeric(gsub("%", "", elections$VEP.Turnout.Rate))
 
-# Create the histogram with density overlay and title
 ggplot(elections, aes(x = VEP.Turnout.Rate)) +
-  geom_histogram(aes(y = ..density..), bins = 30, fill = "skyblue", color = "black") +  # Histogram plot
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "skyblue", color = "black") +  
   geom_density(color = "red") +  # Density curve
   labs(
-    title = "Distribution of VEP Turnout Rate Across States in the 2020 U.S. Election",  # Added title
+    title = "Distribution of VEP Turnout Rate Across States in the 2020 U.S. Election", 
     x = "VEP Turnout Rate (%)",
     y = "Density"
   ) +
@@ -49,8 +47,6 @@ ggplot(elections, aes(x = VEP.Turnout.Rate)) +
 
 
 #2.
-#a)  1. Boxplot with Outliers
-# Clean VEP.Turnout.Rate to remove '%' signs and convert to numeric
 elections$VEP.Turnout.Rate <- as.numeric(gsub("%", "", elections$VEP.Turnout.Rate))
 ggplot(elections, aes(x = State, y = VEP.Turnout.Rate)) +
   geom_boxplot(outlier.shape = 16, outlier.colour = "red") +  
@@ -61,14 +57,13 @@ ggplot(elections, aes(x = State, y = VEP.Turnout.Rate)) +
 
 
 
-#b) 2. Histogram with Normal Curve Overlay
+#b)
 ggplot(elections, aes(x = VEP.Turnout.Rate)) +
   geom_histogram(aes(y = ..density..), bins = 30, fill = "skyblue", color = "black") +  
   geom_density(color = "red") +  
   labs(x = "VEP Turnout Rate (%)", y = "Density") +
   theme_minimal()
 
-# Normalize and reshape the data
 elections_stacked <- elections %>%
   select(State, X..Non.citizen, Prison, Probation, Parole) %>%
   mutate(across(-State, ~ as.numeric(gsub(",", "", .)), .names = "cleaned_{col}")) %>%
