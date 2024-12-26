@@ -70,7 +70,7 @@ elections_stacked <- elections %>%
   pivot_longer(cols = starts_with("cleaned"), names_to = "Category", values_to = "Count") %>%
   mutate(Category = gsub("cleaned_", "", Category))  
 
-# Drop rows with NA values in Count
+
 elections_stacked <- elections_stacked %>%
   filter(!is.na(Count))
 
